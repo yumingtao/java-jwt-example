@@ -3,6 +3,7 @@ package com.ymt.example.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ymt.example.model.Content1JwtHeader;
 import com.ymt.example.model.Content2JwtHeader;
+import com.ymt.example.model.JwtHeader;
 import lombok.SneakyThrows;
 import org.apache.commons.codec.binary.Base64;
 
@@ -51,6 +52,15 @@ public class JwtUtils {
         Content2JwtHeader content2JwtHeader = objectMapper.readValue(header, Content2JwtHeader.class);
 
         return content2JwtHeader;
+    }
+
+    @SneakyThrows
+    public static JwtHeader getJwtHeader(String jwtToken){
+        String header = decodeJwtHeader(jwtToken);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JwtHeader jwtHeader = objectMapper.readValue(header, JwtHeader.class);
+
+        return jwtHeader;
     }
 
     private static String decodeJwtHeader(String jwtToken) {

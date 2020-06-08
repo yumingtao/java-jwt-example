@@ -3,6 +3,7 @@ package com.ymt.example;
 import com.google.common.io.CharStreams;
 import com.ymt.example.model.Content1JwtHeader;
 import com.ymt.example.model.Content2JwtHeader;
+import com.ymt.example.model.JwtHeader;
 import com.ymt.example.utils.JwtUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -49,5 +50,17 @@ public class JwtUtilsTest {
     public void testGetContent2JwtHeader(){
         Content2JwtHeader content2JwtHeader = JwtUtils.getContent2JwtHeader(jwtTokenContent2String);
         Assert.assertEquals(HEADER_JWT_TOKEN_CONTENT2, content2JwtHeader.getKid());
+    }
+
+    @Test
+    public void testGetJwtHeader_fromContent1(){
+        JwtHeader jwtHeader = JwtUtils.getJwtHeader(jwtTokenContent1String);
+        Assert.assertEquals(HEADER_JWT_TOKEN_CONTENT1, jwtHeader.getKid());
+    }
+
+    @Test
+    public void testGetJwtHeader_fromContent2(){
+        JwtHeader jwtHeader = JwtUtils.getJwtHeader(jwtTokenContent2String);
+        Assert.assertEquals(HEADER_JWT_TOKEN_CONTENT2, jwtHeader.getKid());
     }
 }
